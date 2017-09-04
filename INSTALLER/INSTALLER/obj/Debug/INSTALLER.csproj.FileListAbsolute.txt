@@ -1,0 +1,17 @@
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\bin\Debug\INSTALLER.exe.config
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\bin\Debug\INSTALLER.exe
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\bin\Debug\INSTALLER.pdb
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER.csprojResolveAssemblyReference.cache
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\MainWindow.g.cs
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\App.g.cs
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER_MarkupCompile.cache
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER_MarkupCompile.lref
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\MainWindow.baml
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER.g.resources
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER.Properties.Resources.resources
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER.csproj.GenerateResource.Cache
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER.csproj.CoreCompileInputs.cache
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER.exe
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER.pdb
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\Window1.g.cs
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\Window1.baml
