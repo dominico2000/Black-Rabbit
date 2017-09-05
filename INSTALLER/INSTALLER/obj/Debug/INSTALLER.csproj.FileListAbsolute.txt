@@ -15,3 +15,5 @@ C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER.exe
 C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\INSTALLER.pdb
 C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\Window1.g.cs
 C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\Window1.baml
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\Window2.g.cs
+C:\Users\Kasia\source\repos\INSTALLER\INSTALLER\obj\Debug\Window2.baml

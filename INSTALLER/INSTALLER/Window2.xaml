@@ -1,22 +1,12 @@
-﻿<Window x:Class="INSTALLER.MainWindow"
+﻿<Window x:Class="INSTALLER.Window2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:INSTALLER"
         mc:Ignorable="d"
-        Title="IT-TOOLS" Height="280" Width="575">
-    <StackPanel Orientation="Vertical" >
-        <Image Height="262">
-            <Image.Source>
-                <BitmapImage DecodePixelWidth="300" UriSource="/Images/Image.bmp" />
-            </Image.Source>
-        </Image>
-
-
-
-
-    </StackPanel>
-
-
+        Title="ASCII" MinHeight="750" MinWidth="750" ResizeMode="NoResize" >
+    <Grid>
+        
+    </Grid>
 </Window>

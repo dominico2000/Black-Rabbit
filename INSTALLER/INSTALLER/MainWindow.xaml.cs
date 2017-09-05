@@ -24,17 +24,21 @@ namespace INSTALLER
         {
             InitializeComponent();
             
-            ImageBrush myBrush = new ImageBrush();
-            myBrush.ImageSource =
-                new BitmapImage(new Uri(@"C:\Users\Kasia\source\repos\INSTALLER\image.png", UriKind.Absolute));
-            this.Background = myBrush;
+          
         }
 
         private void IPdecbin_Click(object sender, RoutedEventArgs e)
         {
             Window1 window = new Window1();
             window.Show();
-            this.Hide();
+            
+        }
+
+        private void ascii_Click(object sender, RoutedEventArgs e)
+        {
+            Window2 window2 = new Window2();
+            window2.Show();
+            
         }
     }
 }
