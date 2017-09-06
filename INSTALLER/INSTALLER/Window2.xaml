@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:INSTALLER"
         mc:Ignorable="d"
         Title="ASCII" MinHeight="750" MinWidth="750" ResizeMode="NoResize" >
+    <Window.Background>
+        <ImageBrush ImageSource="ASCII.jpg"></ImageBrush>
+    </Window.Background>
     <Grid>
         
     </Grid>

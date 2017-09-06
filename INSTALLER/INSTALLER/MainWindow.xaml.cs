@@ -27,18 +27,23 @@ namespace INSTALLER
           
         }
 
-        private void IPdecbin_Click(object sender, RoutedEventArgs e)
+        private void IP_Click(object sender, RoutedEventArgs e)
         {
             Window1 window = new Window1();
             window.Show();
             
         }
 
-        private void ascii_Click(object sender, RoutedEventArgs e)
+        private void ASCII_Click(object sender, RoutedEventArgs e)
         {
             Window2 window2 = new Window2();
             window2.Show();
             
+        }
+
+        private void Quit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
         }
     }
 }

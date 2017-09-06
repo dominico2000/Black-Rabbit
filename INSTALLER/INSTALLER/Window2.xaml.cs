@@ -22,10 +22,8 @@ namespace INSTALLER
         public Window2()
         {
             InitializeComponent();
-            ImageBrush ASCII = new ImageBrush();
-            ASCII.ImageSource =
-                new BitmapImage(new Uri(@"C:\Users\Kasia\source\repos\INSTALLER\ASCII.jpg", UriKind.Absolute));
-            this.Background = ASCII;
+            
         }
+       
     }
 }

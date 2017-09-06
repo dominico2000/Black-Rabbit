@@ -6,12 +6,14 @@
         xmlns:local="clr-namespace:INSTALLER"
         mc:Ignorable="d"
         Title="IT-TOOLS" Height="280" Width="575">
+    <Window.Background>
+        <ImageBrush ImageSource="21325986_1975536809390615_681591990_n.jpg"></ImageBrush>
+    </Window.Background>
     <StackPanel Orientation="Vertical" >
-        <Image Height="262">
-            <Image.Source>
-                <BitmapImage DecodePixelWidth="300" UriSource="/Images/Image.bmp" />
-            </Image.Source>
-        </Image>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20">USE ANY BUTTON TO START!</TextBlock>
+        <Button x:Name="IP" Click="IP_Click" Width="150" Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="25" >IP(dec->bin)</Button>
+        <Button x:Name="ASCII" Click="ASCII_Click" Width="150" Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="2" >ASCII TABLE</Button>
+        <Button x:Name="Quit" Click="Quit_Click" Width="150" Height="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50" >QUIT</Button>
 
 
 
