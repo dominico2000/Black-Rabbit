@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace INSTALLER
 {
     /// <summary>
@@ -23,8 +24,15 @@ namespace INSTALLER
         public MainWindow()
         {
             InitializeComponent();
+            Brstub br = new Brstub();
             
-          
+
+
+
+
+
+
+
         }
 
         private void IP_Click(object sender, RoutedEventArgs e)
